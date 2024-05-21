@@ -19,7 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard'); //rotta per index admin
+Route::middleware(['auth', 'verified'])
+->name('admin.')
+->prefix('admin')
+->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard'); //rotta per index admin https:...../admin
+});
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
