@@ -17,8 +17,11 @@ class ProjectSeeder extends Seeder
         for ($i=0; $i < 10; $i++) { 
             $project = new Project();
             $project->title = $faker->words(8, true);
-            $project->description = $faker->text(800);
+            //$project->cover_image = $faker->imageUrl(640, 400, 'Projects', true, $project->name, true, 'jpg');
+            $project->description = $faker->text(800); // $faker->paragraphs(4, true) ->>> cosi sarebbe piu giusto per una description
             $project->tools = $faker->words(8, true);
+            //$project->project_url = $faker->url();
+            //$project->source_code_url = $faker->url();
             $project->save();
         }
     }
