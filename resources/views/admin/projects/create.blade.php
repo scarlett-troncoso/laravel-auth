@@ -13,7 +13,7 @@
 
         @include('partials.errors')
 
-        <form action="{{ route('admin.projects.create') }}" method="post">
+        <form action="{{ route('admin.projects.store') }}" method="post">
             <!--se avessemo la cover_image: enctype="multipart/form-data"-->
             @csrf
 
