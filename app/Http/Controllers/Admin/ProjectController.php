@@ -32,7 +32,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        // dd($request->all());
+        $validated = $request->validated();
+
+        // $validated['cover_image'] = Storage::put('uploads', $request->cover_image);
+        // dd($validated);
+        
+        Project::create($validated);
+
+        return to_route('admin.projects.index')->with('message', 'Cobgratulation! Project added correctly');
     }
 
     /**
