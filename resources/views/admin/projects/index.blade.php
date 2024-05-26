@@ -11,6 +11,8 @@
 
     <div class="container mt-5">
 
+        @include('partials.session-message')
+
         <div class="table-responsive-md">
             <table class="table table-striped table-hover table-borderless table-secondary align-middle">
                 <thead class="table-dark">
@@ -31,12 +33,12 @@
                             <td scope="row">{{ $project->id }}</td>
                             <td>{{ $project->title }}</td>
                             <!--<td>
-                                            @*if (Str::startsWith($project->cover_image, 'https://'))
-                                                <img loading="lazy" src="{*{ $project->cover_image }}" alt="">
-                                            @*else
-                                                <img loading="lazy" src="{*{ assets('storage/' . $project->cover_image) }}" alt="">
-                                            @*endif
-                                            </td> -->
+                                                @*if (Str::startsWith($project->cover_image, 'https://'))
+                                                    <img loading="lazy" src="{*{ $project->cover_image }}" alt="">
+                                                @*else
+                                                    <img loading="lazy" src="{*{ assets('storage/' . $project->cover_image) }}" alt="">
+                                                @*endif
+                                                </td> -->
                             <td>{{ $project->description }}</td>
                             <td>{{ $project->tools }}</td>
                             <!-- <td> <a href="{*{ $project->project_url }}" target="_blank">Preview</a> </td>-->
