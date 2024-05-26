@@ -22,7 +22,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'title' => 'required|unique:projects,title',//il titolo deve essere l'unico della tabella 'projects' e la colonna 'title'
             // 'cover_image' => 'nullable|image|max:500'
             'description' => 'nullable',
             'tools' => 'nullable'
