@@ -10,6 +10,7 @@
     </header>
 
     <div class="container mt-5">
+
         <div class="table-responsive-md">
             <table class="table table-striped table-hover table-borderless table-secondary align-middle">
                 <thead class="table-dark">
@@ -29,13 +30,30 @@
                         <tr class="table-dark">
                             <td scope="row">{{ $project->id }}</td>
                             <td>{{ $project->title }}</td>
-                            <!--<td> <img loading="lazy" src="{*{ $project->cover_image }}" alt=""></td> -->
+                            <!--<td>
+                                            @*if (Str::startsWith($project->cover_image, 'https://'))
+                                                <img loading="lazy" src="{*{ $project->cover_image }}" alt="">
+                                            @*else
+                                                <img loading="lazy" src="{*{ assets('storage/' . $project->cover_image) }}" alt="">
+                                            @*endif
+                                            </td> -->
                             <td>{{ $project->description }}</td>
                             <td>{{ $project->tools }}</td>
                             <!-- <td> <a href="{*{ $project->project_url }}" target="_blank">Preview</a> </td>-->
                             <!-- il (target="_blank") serve per aprire in link un altra scheda altrimenta apre nella stessa pagina -->
-                            <td>VIEW | EDIT | DELETE</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.projects.show', $project) }}">
+                                    <i class="fa fa-eye fa-sm fa-fw" aria-hidden="true"></i> VIEW
+                                </a>
 
+                                <a class="btn btn-secondary btn-sm" href="{{ route('admin.projects.edit', $project) }}">
+                                    <i class="fa fa-pencil fa-sm fa-fw" aria-hidden="true"></i> EDIT
+                                </a>
+
+                                <a class="btn btn-danger btn-sm" href="">
+                                    <i class="fa fa-trash fa-sm fa-fw" aria-hidden="true"></i> DELETE
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr class="table-dark">
