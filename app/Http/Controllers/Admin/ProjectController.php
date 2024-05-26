@@ -91,6 +91,13 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+
+        /* 
+        if($project->cover_image && !Str::startsWith($project->cover_image, 'https://')){ //Str importato con use
+        Storage::delete($project->cover_image)} // se il project ha gia una cover_image cancellare */
+
+        $project->delete();
+
+         return to_route('admin.projects.index', compact('project'))->with('message', 'Project deleted correctly');
     }
 }
