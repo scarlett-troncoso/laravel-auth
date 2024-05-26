@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
         // $validated['cover_image'] = Storage::put('uploads', $request->cover_image);
         // dd($validated);
-        
+
         Project::create($validated);
 
         return to_route('admin.projects.index')->with('message', 'Cobgratulation! Project added correctly');
@@ -48,7 +48,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -56,7 +56,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -64,7 +64,26 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        // dd($request->all());
+
+        // validate inputs
+        $validated = $request->validated();
+
+        /* if($request->has(cover_image){ //se la richiesta, cioé i data editati, ha una cover_image
+                if($project->cover_image){
+                Storage::delete($project->cover_image)} // se il project ha gia una cover_image cancellare
+
+                $image_path = Store::put('uploads', $request->cover_image)
+                $validated['cover_image'] = $image_path;
+         })*/
+
+         // dd($validated);
+
+         // updated model
+        $project->update($validated);
+
+        // redirect
+        return to_route('admin.projects.index', compact('project'))->with('message', 'Cobgratulation! Project edited correctly');
     }
 
     /**
