@@ -35,8 +35,10 @@ class ProjectController extends Controller
         // dd($request->all());
         $validated = $request->validated();
 
-        // $validated['cover_image'] = Storage::put('uploads', $request->cover_image);
-        // dd($validated);
+        /*if($request->has(cover_image){
+            $validated['cover_image'] = Storage::put('uploads', $request->cover_image);
+        }*/
+        // dd($validated); 
 
         Project::create($validated);
 
