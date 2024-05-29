@@ -23,7 +23,6 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Cover Image</th>
-                        <th>Description</th>
                         <th>Tools</th>
                         <th>Project Url</th>
                         <th>Source Code</th>
@@ -38,13 +37,12 @@
                             <td>{{ $project->title }}</td>
                             <td>
                                 @if (Str::startsWith($project->cover_image, 'https://'))
-                                    <img loading="lazy" src="{*{ $project->cover_image }}" alt="">
+                                    <img width="140" loading="lazy" src="{{ $project->cover_image }}" alt="">
                                 @else
-                                    <img loading="lazy" src="{*{ assets('storage/' . $project->cover_image) }}"
-                                        alt="">
+                                    <img width="140" loading="lazy"
+                                        src="{{ assets('storage/' . $project->cover_image) }}" alt="">
                                 @endif
                             </td>
-                            <td>{{ $project->description }}</td>
                             <td>{{ $project->tools }}</td>
                             <td> <a href="{{ $project->project_url }}" target="_blank">Preview</a> </td>
                             <td> <a href="{{ $project->source_code_url }}" target="_blank">Preview</a> </td>

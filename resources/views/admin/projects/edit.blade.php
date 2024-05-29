@@ -13,8 +13,7 @@
 
         @include('partials.errors')
 
-        <form action="{{ route('admin.projects.update', $project) }}" method="post">
-            <!--se avessemo la cover_image: enctype="multipart/form-data"-->
+        <form action="{{ route('admin.projects.update', $project) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -27,6 +26,17 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="d-flex gap-3">
+                <img width="140" src="{{ asset('storage/' . $project->cover_image) }}" alt="">
+                <div class="mb-3">
+                    <label for="cover_image" class="form-label">Change cover image </label>
+                    <input type="file" class="form-control" name="cover_image" id="cover_image" placeholder="cover image"
+                        aria-describedby="coverImageHelper" />
+                    <div id="coverImageHelper" class="form-text">Change cover image for this post</div>
+                </div>
+            </div>
+
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
@@ -42,6 +52,27 @@
                     placeholder="Tools used in my project" value="{{ old('tools', $project->tools) }}" />
                 <small id="toolsHelper" class="form-text text-muted">Type a tools used for your project</small>
                 @error('tools')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="project_url" class="form-label">Project URL</label>
+                <input type="text" class="form-control" name="project_url" id="project_url" aria-describedby="urlHelper"
+                    placeholder="https://link_here" value="{{ old('project_url', $project->project_url) }}" />
+                <small id="urlHelper" class="form-text text-muted">Type a url for your project</small>
+                @error('project_url')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="source_code_url" class="form-label">Source Code Url</label>
+                <input type="text" class="form-control" name="source_code_url" id="source_code_url"
+                    aria-describedby="sourceCodeHelper" placeholder="https://link_here"
+                    value="{{ old('source_code_url', $project->source_code_url) }}" />
+                <small id="sourceCodeHelper" class="form-text text-muted">Type a Source Code Url for your project</small>
+                @error('project_url')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
