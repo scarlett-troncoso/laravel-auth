@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -26,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        return view('admin.projects.create', ['types' => Type::all() ]); // prendo tutti i dati della tabella types
     }
 
     /**
@@ -61,7 +62,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all(); // prendo tutti i dati della tabella types
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
