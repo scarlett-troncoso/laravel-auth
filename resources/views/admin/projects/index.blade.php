@@ -39,8 +39,8 @@
                                 @if (Str::startsWith($project->cover_image, 'https://'))
                                     <img width="140" loading="lazy" src="{{ $project->cover_image }}" alt="">
                                 @else
-                                    <img width="140" loading="lazy"
-                                        src="{{ assets('storage/' . $project->cover_image) }}" alt="">
+                                    <img width="140" loading="lazy" src="{{ asset('storage/' . $project->cover_image) }}"
+                                        alt="">
                                 @endif
                             </td>
                             <td>{{ $project->tools }}</td>

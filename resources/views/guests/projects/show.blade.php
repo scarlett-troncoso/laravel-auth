@@ -16,7 +16,7 @@
                 @if (Str::startsWith($project->cover_image, 'https://'))
                     <img loading="lazy" class="img-fluid" src="{{ $project->cover_image }}" alt="">
                 @else
-                    <img loading="lazy" class="img-fluid" src="{{ assets('storage/' . $project->cover_image) }}"
+                    <img loading="lazy" class="img-fluid" src="{{ asset('storage/' . $project->cover_image) }}"
                         alt="">
                 @endif
             </div>

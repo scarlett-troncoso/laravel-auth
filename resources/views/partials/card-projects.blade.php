@@ -3,7 +3,7 @@
         @if (Str::startsWith($project->cover_image, 'https://'))
             <img loading="lazy" class="card-img-top" src="{{ $project->cover_image }}" alt="">
         @else
-            <img loading="lazy" class="card-img-top" src="{{ assets('storage/' . $project->cover_image) }}" alt="">
+            <img loading="lazy" class="card-img-top" src="{{ asset('storage/' . $project->cover_image) }}" alt="">
         @endif
     </a>
     <div class="card-body">
