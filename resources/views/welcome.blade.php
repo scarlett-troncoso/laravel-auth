@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <div class="jumbotron p-3 mb-3 bg-light rounded-3">
+    <div class="jumbotron p-3 mb-3 rounded-3" style="background-color: rgb(204, 194, 243)">
         <div class="container py-5">
             <div class="row">
                 <div class="col-auto">
                     <div class="img-profile">
-                        <img width="200" class="img-fluid rounded-circle" src="/img/" alt="">
+                        <img width="200" class="img-fluid rounded-circle" src="./images.png" alt="">
                     </div>
                 </div>
                 <div class="col">
