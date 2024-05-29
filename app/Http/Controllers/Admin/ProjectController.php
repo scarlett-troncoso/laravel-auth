@@ -6,6 +6,8 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -35,11 +37,12 @@ class ProjectController extends Controller
         // dd($request->all());
         $validated = $request->validated();
 
-        /*if($request->has(cover_image){
+        if($request->has('cover_image')){
             $validated['cover_image'] = Storage::put('uploads', $request->cover_image);
-        }*/
+        }
         // dd($validated); 
 
+        $validated['slug'] = Str::slug($request->title, '-');
         Project::create($validated);
 
         return to_route('admin.projects.index')->with('message', 'Cobgratulation! Project added correctly');
@@ -71,16 +74,16 @@ class ProjectController extends Controller
         // validate inputs
         $validated = $request->validated();
 
-        /* if($request->has(cover_image){ //se la richiesta, cioé i data editati, ha una cover_image
+        if($request->has('cover_image')){ //se la richiesta, cioé i data editati, ha una cover_image
                 if($project->cover_image){
-                Storage::delete($project->cover_image)} // se il project ha gia una cover_image cancellare
+                Storage::delete($project->cover_image);} // se il project ha gia una cover_image cancellare
 
-                $image_path = Store::put('uploads', $request->cover_image)
+                $image_path = Storage::put('uploads', $request->cover_image);
                 $validated['cover_image'] = $image_path;
-         })*/
+         }
 
          // dd($validated);
-
+         $validated['slug'] = Str::slug($request->title, '-');
          // updated model
         $project->update($validated);
 
