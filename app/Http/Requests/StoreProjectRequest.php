@@ -23,9 +23,11 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:projects,title',//il titolo deve essere l'unico della tabella 'projects' e la colonna 'title'
-            // 'cover_image' => 'nullable|image|max:500'
+            'cover_image' => 'nullable|image|max:500',
             'description' => 'nullable',
-            'tools' => 'nullable'
+            'tools' => 'nullable',
+            'project_url'=> 'nullable',
+            'source_code_url'=> 'nullable',
         ];
     }
 }
