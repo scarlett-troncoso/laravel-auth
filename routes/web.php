@@ -23,11 +23,11 @@ Route::get('/', function () {
 
 Route::get('projects', function () {
     return view('guests.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)]);
-})->name('guests.projects.index');
+})->name('guests.projects.index')/*->parameters(['projects' => 'project:slug'])*/; // non so se va bene
 
 Route::get('projects/{project}', function (Project $project) {
     return view('guests.projects.show', compact('project'));
-})->name('guests.projects.show');
+})->name('guests.projects.show')/*->parameters(['project:slug'])*/; // non so se va bene
 
 Route::middleware(['auth', 'verified'])
 ->name('admin.')
@@ -35,7 +35,9 @@ Route::middleware(['auth', 'verified'])
 ->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard'); //rotta per index admin https:...../admin
 
-    Route::resource('projects', ProjectController::class); // per richiamare questa rotta: admin.projects.index , o altro
+    Route::resource('projects', ProjectController::class) // per richiamare questa rotta: admin.projects.index , o altro
+    ->parameters([
+        'projects' => 'project:slug']); 
 });
 
 
