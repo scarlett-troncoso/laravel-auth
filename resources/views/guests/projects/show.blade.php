@@ -24,6 +24,10 @@
                 <h4 class="text-muted">
                     {{ $project->title }}
                 </h4>
+                <div class="metadata">
+                    <strong>Type: </strong> {{ $project->type ? $project->type->name : 'Uncategorized' }}
+                    <!--Se questo post ha un type allora vedere il name dell type altrimente vedere uncategorized-->
+                </div>
                 <p class="col my-4">{{ $project->description }}</p>
                 <div class="col">{{ $project->tools }}</div>
                 <div class="links">
