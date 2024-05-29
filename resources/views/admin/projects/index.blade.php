@@ -22,8 +22,12 @@
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
+                        <th>Cover Image</th>
                         <th>Description</th>
                         <th>Tools</th>
+                        <th>Project Url</th>
+                        <th>Source Code</th>
+                        <th>Slug</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -32,17 +36,20 @@
                         <tr class="table-dark">
                             <td scope="row">{{ $project->id }}</td>
                             <td>{{ $project->title }}</td>
-                            <!--<td>
-                                                    @*if (Str::startsWith($project->cover_image, 'https://'))
-                                                        <img loading="lazy" src="{*{ $project->cover_image }}" alt="">
-                                                    @*else
-                                                        <img loading="lazy" src="{*{ assets('storage/' . $project->cover_image) }}" alt="">
-                                                    @*endif
-                                                    </td> -->
+                            <td>
+                                @if (Str::startsWith($project->cover_image, 'https://'))
+                                    <img loading="lazy" src="{*{ $project->cover_image }}" alt="">
+                                @else
+                                    <img loading="lazy" src="{*{ assets('storage/' . $project->cover_image) }}"
+                                        alt="">
+                                @endif
+                            </td>
                             <td>{{ $project->description }}</td>
                             <td>{{ $project->tools }}</td>
-                            <!-- <td> <a href="{*{ $project->project_url }}" target="_blank">Preview</a> </td>-->
+                            <td> <a href="{{ $project->project_url }}" target="_blank">Preview</a> </td>
+                            <td> <a href="{{ $project->source_code_url }}" target="_blank">Preview</a> </td>
                             <!-- il (target="_blank") serve per aprire in link un altra scheda altrimenta apre nella stessa pagina -->
+                            <td>{{ $project->slug }}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{ route('admin.projects.show', $project) }}">
                                     <i class="fa fa-eye fa-sm fa-fw" aria-hidden="true"></i> VIEW
