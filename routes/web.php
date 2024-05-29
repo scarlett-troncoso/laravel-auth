@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Project;
+use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +19,9 @@ use App\Models\Project;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', ['projects' => Project::orderByDesc('id')->take(3)->get()]);
-});
+Route::get('/', [PageController::class, 'index']);
 
-Route::get('projects', function () {
-    return view('guests.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)]);
-})->name('guests.projects.index')/*->parameters(['projects' => 'project:slug'])*/; // non so se va bene
-
-Route::get('projects/{project}', function (Project $project) {
-    return view('guests.projects.show', compact('project'));
-})->name('guests.projects.show')/*->parameters(['project:slug'])*/; // non so se va bene
+Route::resource('projects', GuestProjectController::class)->only(['index', 'show'])->parameters(['projects' => 'project:slug']);
 
 Route::middleware(['auth', 'verified'])
 ->name('admin.')
