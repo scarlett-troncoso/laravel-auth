@@ -27,7 +27,7 @@ class UpdateProjectRequest extends FormRequest
             'title' => ['required', Rule::unique('projects')->ignore($this->project?->id)], //il titolo deve essere l'unico della tabella 'projects';  il campo da validare nell update con 'unique' ci dara un errore perche controllerá anche se stesso cioé il suo 'title', per quello inseriamo lo "ignore" e l'id del project, per dirli che deve controllare che sia l'unico ma con ecezione di lui stesso. questo si puó fare anche in questo altro modo sotto: ↓↓↓
             //'title' => 'required|unique:projects,title,except,' . $this->project->id, //il titolo deve essere l'unico della tabella 'projects' e la colonna 'title'; inseriamo lo "except" e l'id del project, per dirli che deve controllare che sia l'unico ma con ecezione di lui stesso
             
-            
+            'type_id' => 'nullable|exists:types,id',
             'cover_image' => 'nullable|image|max:500',
             'description' => 'nullable',
             'tools' => 'nullable',
