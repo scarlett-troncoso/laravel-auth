@@ -1,25 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">{{ $project->title }}</h1>
-
-            <a href="{{ route('guests.projects.index') }}">
-                <i class="fa fa-arrow-left fa-sm fa-fw" aria-hidden="true"></i> Back
-            </a>
+    <header class="py-3 bg-secondary">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1>
+                {{ $project->title }}
+            </h1>
+            <a href="{{ route('projects.index') }}"> <i class="fas fa-arrow-left fa-sm fa-fw" aria-hidden="true"></i>
+                Back</a>
         </div>
-    </div>
-
-
-
-    <div class="container">
+    </header>
+    <div class="container mt-4">
         <div class="row row-cols-1 row-cols-md-2">
-            <p class="col">{{ $project->description }}</p>
-
-            <h4 class="col">{{ $project->title }}</h4>
-            <div class="col">{{ $project->tools }}</div>
-
+            <div class="col">
+                @if (Str::startsWith($project->cover_image, 'https://'))
+                    <img loading="lazy" class="img-fluid" src="{{ $project->cover_image }}" alt="">
+                @else
+                    <img loading="lazy" class="img-fluid" src="{{ assets('storage/' . $project->cover_image) }}"
+                        alt="">
+                @endif
+            </div>
+            <div class="col">
+                <h4 class="text-muted">
+                    {{ $project->title }}
+                </h4>
+                <p class="col my-4">{{ $project->description }}</p>
+                <div class="col">{{ $project->tools }}</div>
+                <div class="links">
+                    <a class="btn btn-primary" href="{{ $project->project_url }}" role="button">
+                        <i class="fas fa-link fa-sm fa-fw" aria-hidden="true"></i>Preview
+                    </a>
+                    <a class="btn btn-primary" href="{{ $project->source_code_url }}" role="button">
+                        <i class="fas fa-link fa-sm fa-fw" aria-hidden="true"></i>Source Code
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

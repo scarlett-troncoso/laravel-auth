@@ -15,36 +15,19 @@
     </div>
 
     <div class="content" id="projects">
-        <div class="container">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora temporibus, dicta nemo aliquam totam nisi
-                deserunt soluta quas voluptatum ab beatae praesentium necessitatibus minus, facilis illum rerum officiis
-                accusamus dolores!
-            </p>
-
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="container mt-4">
+            <div class="row row-cols-1 row-cols-md-3">
                 @forelse ($projects as $project)
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h2 class="card-top">{{ $project->title }}</h2>
-                            </div>
-                            <div class="card-footer">
-                                <a class="btn btn-primary" href="{{ route('guests.projects.show', $project) }}">View</a>
-                            </div>
-                        </div>
-
-
+                    <div class="col  mb-4">
+                        @include('partials.card-projects')
                     </div>
+
                 @empty
                     <div class="col">
                         No projects yet
                     </div>
                 @endforelse
             </div>
-
-
         </div>
-
-
     </div>
 @endsection
