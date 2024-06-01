@@ -29,5 +29,9 @@
                 @endforelse
             </div>
         </div>
+
+        <div>
+            {{ $projects->links('pagination::bootstrap-5') }}
+        </div>
     </div>
 @endsection
