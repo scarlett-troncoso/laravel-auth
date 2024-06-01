@@ -38,7 +38,16 @@
                     @endforeach
                 </select>
             </div>
-
+            <div class="d-flex gap-2 flex-wrap">
+                @foreach ($technologies as $tech)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $tech->id }}"
+                            {{ in_array($tech->id, old('technologies', [])) ? 'checked' : '' }}
+                            id="technology-{{ $tech->id }}" name="technologies[]" />
+                        <label class="form-check-label" for="technology-{{ $tech->id }}"> {{ $tech->name }} </label>
+                    </div>
+                @endforeach
+            </div>
             <div class="mb-3">
                 <label for="cover_image" class="form-label">Upload cover image </label>
                 <input type="file" class="form-control" name="cover_image" id="cover_image" placeholder="cover image"
