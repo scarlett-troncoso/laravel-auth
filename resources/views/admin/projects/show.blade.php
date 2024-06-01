@@ -27,6 +27,15 @@
                 <div class="metadata">
                     <strong>Type: </strong> {{ $project->type ? $project->type->name : 'Uncategorized' }}
                     <!--Se questo post ha un type allora vedere il name dell type altrimente vedere uncategorized-->
+
+                    <div class="technologies">
+                        <strong>Technologies:</strong>
+                        @forelse ($project->technologies as $tech)
+                            <span class="badge bg-primary">{{ $tech->name }}</span>
+                        @empty
+                            <span>N/A</span>
+                        @endforelse
+                    </div>
                 </div>
                 <p class="col my-4">{{ $project->description }}</p>
                 <div class="col">{{ $project->tools }}</div>
