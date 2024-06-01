@@ -70,7 +70,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all(); // prendo tutti i dati della tabella types
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all(); // prendo tutti i dati della tabella technologies
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -96,6 +97,10 @@ class ProjectController extends Controller
          // updated model
         $project->update($validated);
 
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($validated['technologies']);
+        }
+
         // redirect
         return to_route('admin.projects.index', compact('project'))->with('message', 'Cobgratulation! Project edited correctly');
     }
@@ -105,6 +110,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // $project->technologies()->detach(); // se come abbiamo cascateOnDelete nella tabella pivot, allora non ce bisogno di fare questo qui
+
         if($project->cover_image && !Str::startsWith($project->cover_image, 'https://')){
         Storage::delete($project->cover_image);} // se il project ha gia una cover_image cancellare
 
