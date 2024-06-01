@@ -24,6 +24,7 @@ class StoreProjectRequest extends FormRequest
         return [
             'title' => 'required|unique:projects,title',//il titolo deve essere l'unico della tabella 'projects' e la colonna 'title'
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id',
             'cover_image' => 'nullable|image|max:500',
             'description' => 'nullable',
             'tools' => 'nullable',
