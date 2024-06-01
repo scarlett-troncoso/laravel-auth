@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -27,7 +28,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create', ['types' => Type::all() ]); // prendo tutti i dati della tabella types
+        $types = Type::all(); // prendo tutti i dati della tabella types
+        $technologies = Technology::all(); // prendo tutti i dati della tabella technologies
+        return view('admin.projects.create', compact('types', 'technologies')); 
     }
 
     /**
@@ -44,7 +47,11 @@ class ProjectController extends Controller
         // dd($validated); 
 
         $validated['slug'] = Str::slug($request->title, '-');
-        Project::create($validated);
+        $project = Project::create($validated);
+
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($validated['technologies']);
+        }
 
         return to_route('admin.projects.index')->with('message', 'Cobgratulation! Project added correctly');
     }
