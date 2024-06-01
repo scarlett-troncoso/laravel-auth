@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Model
 {
@@ -20,5 +21,15 @@ class Project extends Model
     public function type(): BelongsTo /*Project apartiene(belongsTo) a un solo type*/
     {
         return $this->belongsTo(Type::class); /*restituisce un'istanza di questa relazione belongsTo*/
+    }
+
+    /**
+     * The technologies that belong to the Project
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function technologies(): BelongsToMany
+    {
+        return $this->belongsToMany(Technology::class);
     }
 }
